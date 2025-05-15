@@ -3,7 +3,12 @@ import * as path from 'path';
 
 export default defineConfig({
   root: path.resolve(__dirname, 'src/renderer'),
-  base: './', // ← tell Vite to emit "./assets/..." instead of "/assets/..."
+  base: './', // Emit relative asset URLs so file:// works
+  server: {
+    port: 5173,
+    strictPort: true,
+    hmr: true, // Enable HMR websocket
+  },
   build: {
     outDir: path.resolve(__dirname, 'dist'),
     emptyOutDir: true,

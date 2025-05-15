@@ -4,6 +4,9 @@
   "main": "src/main.ts",
   "scripts": {
     "start": "electron ./dist/main.js",
-    "build": "vite build && tsc --project tsconfig.json"
+    "build": "vite build && tsc -p tsconfig.json",
+    "dev:renderer": "vite",
+    "dev:main": "tsc -w -p tsconfig.json",
+    "dev": "cross-env NODE_ENV=development concurrently \"pnpm run dev:main\" \"pnpm run dev:renderer\" \"wait-on http://localhost:5173 && electron ./dist/main.js\""
   }
 }
