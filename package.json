@@ -1,0 +1,33 @@
+{
+  "name": "prometheus-engine",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "private": true,
+  "scripts": {
+    "build": "pnpm --filter editor run build",
+    "start": "pnpm --filter editor run start",
+    "test": "pnpm --recursive run test",
+    "sanity-check": "node scripts/sanity-check.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.11.0",
+  "devDependencies": {
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/github": "^11.0.2",
+    "@types/node": "^22.15.18",
+    "commitizen": "^4.3.1",
+    "cz-conventional-changelog": "^3.3.0",
+    "electron": "^36.2.0",
+    "prettier": "^3.5.3",
+    "semantic-release": "^24.2.3",
+    "typescript": "^5.8.3",
+    "vite": "^6.3.5"
+  },
+  "dependencies": {
+    "pixi.js": "^8.9.2"
+  }
+}

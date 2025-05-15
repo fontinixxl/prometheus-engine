@@ -1,0 +1,9 @@
+{
+  "name": "editor",
+  "version": "0.0.0",
+  "main": "src/main.ts",
+  "scripts": {
+    "start": "electron ./dist/main.js",
+    "build": "vite build && tsc --project tsconfig.json"
+  }
+}

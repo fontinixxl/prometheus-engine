@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "ES2022", // Modern JS output
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "strict": true, // Enable all strict type-checking
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "declaration": true,
+    "outDir": "dist"
+  }
+}
