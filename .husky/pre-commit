@@ -1,4 +1,8 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
+# run ESLint and fail on any warnings/errors
+pnpm run lint --max-warnings=0
+
+# then run tests
 pnpm test

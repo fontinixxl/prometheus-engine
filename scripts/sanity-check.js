@@ -2,9 +2,9 @@
  * A quick cross‐platform config & CLI check for your monorepo.
  */
 
-const { exec } = require('child_process');
-const fs = require('fs');
-const path = require('path');
+import { exec } from 'child_process';
+import fs from 'fs';
+import path from 'path';
 
 const CHECKS = [
   { name: 'pnpm', cmd: 'pnpm --version' },
@@ -49,7 +49,8 @@ function checkPackageScripts(pkgPath, expected) {
     console.error(`✗ Missing ${pkgPath}`);
     return;
   }
-  const pkg = require(fullPath);
+  const pkgContent = fs.readFileSync(fullPath, 'utf-8');
+  const pkg = JSON.parse(pkgContent);
   expected.forEach((s) => {
     const ok = pkg.scripts && pkg.scripts[s];
     console.log(`${ok ? '✔' : '✗'} ${pkgPath} script "${s}"`);

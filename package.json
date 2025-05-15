@@ -8,13 +8,17 @@
     "build": "pnpm --filter editor run build",
     "start": "pnpm --filter editor run start",
     "test": "pnpm --recursive run test",
-    "sanity-check": "node scripts/sanity-check.js"
+    "sanity-check": "node scripts/sanity-check.js",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "packageManager": "pnpm@10.11.0",
   "devDependencies": {
+    "@eslint/js": "^9.26.0",
+    "@eslint/json": "^0.12.0",
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
     "@semantic-release/github": "^11.0.2",
@@ -22,9 +26,13 @@
     "commitizen": "^4.3.1",
     "cz-conventional-changelog": "^3.3.0",
     "electron": "^36.2.0",
+    "eslint": "^9.26.0",
+    "eslint-plugin-react": "^7.37.5",
+    "globals": "^16.1.0",
     "prettier": "^3.5.3",
     "semantic-release": "^24.2.3",
     "typescript": "^5.8.3",
+    "typescript-eslint": "^8.32.1",
     "vite": "^6.3.5"
   },
   "dependencies": {
