@@ -4,13 +4,18 @@
   "description": "",
   "main": "index.js",
   "private": true,
+  "workspaces": [
+    "packages/*",
+    "games/*"
+  ],
   "scripts": {
     "build": "pnpm --filter editor run build",
     "start": "pnpm --filter editor run start",
     "test": "pnpm --recursive run test",
-    "sanity-check": "node scripts/sanity-check.js",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "lint:fix": "eslint . --fix",
+    "dev": "pnpm --filter editor dev",
+    "init-game": "pnpm --filter cli run exec"
   },
   "keywords": [],
   "author": "",

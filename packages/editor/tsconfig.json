@@ -1,8 +1,20 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "outDir": "dist", // compiles main.ts → dist/main.js
-    "module": "ESNext"
+    "module": "commonjs", // Crucial for Electron main and preload
+    "outDir": "./dist", // Override outDir to be relative to this tsconfig.json (i.e., packages/editor/dist)
+    "rootDir": "./src", // Explicitly set rootDir for clarity, relative to this tsconfig.json
+    "baseUrl": "./",
+    "paths": {
+      "@games/*": ["../../games/*"]
+    }
   },
-  "include": ["src"]
+  "include": [
+    "src/main.ts", // Be more specific with includes for the main process compilation
+    "src/preload.ts"
+  ]
+  // "src" would also work if src/renderer is not meant to be compiled by this tsc pass
+  // If you have a separate tsconfig for the renderer (often handled by Vite directly),
+  // then "include": ["src/main.ts", "src/preload.ts"] is more precise.
+  // If "src" includes renderer TS files that tsc shouldn't process here, it might cause issues or slow down.
 }

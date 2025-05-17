@@ -7,6 +7,6 @@
     "build": "vite build && tsc -p tsconfig.json",
     "dev:renderer": "vite",
     "dev:main": "tsc -w -p tsconfig.json",
-    "dev": "cross-env NODE_ENV=development concurrently \"pnpm run dev:main\" \"pnpm run dev:renderer\" \"wait-on http://localhost:5173 && electron ./dist/main.js\""
+    "dev": "cross-env NODE_ENV=development tsc -p tsconfig.json && concurrently \"pnpm run dev:main\" \"pnpm run dev:renderer\" \"wait-on http://localhost:5173 file:./dist/main.js && cross-env NODE_ENV=development electron ./dist/main.js\""
   }
 }

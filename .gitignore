@@ -38,3 +38,7 @@ logs/
 
 # Misc
 Thumbs.db
+
+# Games files
+games/*
+docs/*

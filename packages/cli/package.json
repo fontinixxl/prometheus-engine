@@ -1,9 +1,12 @@
 {
   "name": "cli",
   "version": "0.0.0",
-  "main": "src/main.ts",
+  "private": true,
+  "main": "dist/init-game.js",
   "scripts": {
-    "start": "electron ./src/main.ts",
-    "build": "vite build"
-  }
+    "build": "tsc -p tsconfig.json",
+    "exec": "node dist/init-game.js"
+  },
+  "dependencies": {},
+  "devDependencies": {}
 }

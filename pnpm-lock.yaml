@@ -73,6 +73,18 @@ importers:
         specifier: ^8.0.3
         version: 8.0.3
 
+  games/pixi-example-basic:
+    dependencies:
+      engine-core:
+        specifier: workspace:*
+        version: link:../../packages/engine-core
+
+  games/sample-spine:
+    dependencies:
+      engine-core:
+        specifier: workspace:*
+        version: link:../../packages/engine-core
+
   packages/cli: {}
 
   packages/editor: {}

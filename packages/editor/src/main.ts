@@ -1,29 +1,49 @@
-import { app, BrowserWindow } from 'electron';
+import { app, BrowserWindow, Menu, dialog } from 'electron';
 import * as path from 'path';
-import { fileURLToPath } from 'url';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 const isDev = process.env.NODE_ENV === 'development';
 
 async function createWindow() {
-  const win = new BrowserWindow({
+  const mainWindow = new BrowserWindow({
     width: 1024,
     height: 768,
     webPreferences: {
-      contextIsolation: false,
+      contextIsolation: true, // Recommended: true
       nodeIntegration: false,
+      preload: path.join(__dirname, 'preload.js'),
     },
   });
 
   if (isDev) {
-    // 1) wait for Vite’s HMR server
-    await win.loadURL('http://localhost:5173');
-    win.webContents.openDevTools();
+    console.log('Development mode, loading from Vite server');
+    await mainWindow.loadURL('http://localhost:5173');
+    mainWindow.webContents.openDevTools();
   } else {
-    // 2) load the published build
-    win.loadFile(path.join(__dirname, 'index.html'));
+    console.log('Production mode, loading from file system');
+    // Corrected path for production build
+    await mainWindow.loadFile(path.join(__dirname, 'renderer', 'index.html'));
   }
+
+  Menu.setApplicationMenu(
+    Menu.buildFromTemplate([
+      {
+        label: 'File',
+        submenu: [
+          {
+            label: 'Open Project…',
+            click: async () => {
+              const { canceled, filePaths } = await dialog.showOpenDialog(mainWindow, {
+                properties: ['openDirectory'],
+              });
+              if (!canceled && filePaths[0]) {
+                mainWindow.webContents.send('project-opened', filePaths[0]);
+              }
+            },
+          },
+        ],
+      },
+    ]),
+  );
 }
 
 app.whenReady().then(createWindow);
