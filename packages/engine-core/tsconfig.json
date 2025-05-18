@@ -1,0 +1,19 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "rootDir": "src",
+    "baseUrl": ".",
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "esModuleInterop": true,
+    "moduleResolution": "bundler",
+    "target": "es2020",
+    "module": "ESNext",
+    "skipLibCheck": true,
+    "lib": ["ESNext", "DOM", "DOM.Iterable"]
+  },
+  "include": ["src/index.ts", "src/PrometheusEngine.ts"],
+  "exclude": ["node_modules", "dist", "**/*.test.ts", "src/old/**"]
+}

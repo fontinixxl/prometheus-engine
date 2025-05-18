@@ -1,9 +1,28 @@
 {
   "name": "engine-core",
   "version": "0.0.0",
-  "main": "src/main.ts",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "start": "electron ./src/main.ts",
-    "build": "vite build"
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "test": "jest"
+  },
+  "dependencies": {
+    "@pixi/layout": "^3.0.2",
+    "pixi.js": "^8.9.2"
   }
 }
