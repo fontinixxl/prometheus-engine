@@ -4,16 +4,13 @@
 export { Engine, EngineConfig } from './PrometheusEngine';
 
 // Re-export commonly used PixiJS types for convenience
-export { 
-  Application, 
-  Container, 
-  Sprite, 
-  Graphics, 
+export {
+  Application,
+  Container,
+  Sprite,
+  Graphics,
   Text,
   TextStyle,
   Texture,
-  Assets
+  Assets,
 } from 'pixi.js';
-
-// Legacy export for backward compatibility
-export const helloEngine = () => 'Hello from Prometheus Engine!';
