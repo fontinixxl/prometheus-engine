@@ -1,11 +1,13 @@
 import { defineConfig } from 'vite';
 import path from 'path';
+import prometheusImports from '../engine-core/imports.js';
 
 export default defineConfig({
   root: path.resolve(__dirname, 'src/renderer'),
   resolve: {
     alias: {
       '@games': path.resolve(__dirname, '../../games'),
+      ...prometheusImports,
     },
   },
   base: './', // Emit relative asset URLs so file:// works
@@ -26,6 +28,7 @@ export default defineConfig({
     emptyOutDir: true,
     rollupOptions: {
       input: path.resolve(__dirname, 'src/renderer/index.html'),
+      external: ['@prometheus/engine-core', /^@games\/.*/],
     },
   },
   plugins: [],

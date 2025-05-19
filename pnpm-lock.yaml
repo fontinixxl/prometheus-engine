@@ -97,7 +97,7 @@ importers:
         specifier: ^8.0.3
         version: 8.0.3
 
-  games/pixi-example-basic:
+  games/bouncing-bunnies:
     dependencies:
       engine-core:
         specifier: workspace:*
@@ -112,7 +112,13 @@ importers:
         specifier: workspace:*
         version: link:../../packages/engine-core
 
-  games/sample-spine:
+  games/test-game-final:
+    dependencies:
+      engine-core:
+        specifier: workspace:*
+        version: link:../../packages/engine-core
+
+  games/test-game-fixed:
     dependencies:
       engine-core:
         specifier: workspace:*

@@ -1,2 +1,4 @@
-// Minimal CLI entry point
-console.log('Hello from rgs-pixi CLI!');
+// CLI entry point
+// Re-export CLI tools
+export * from './init-game.js';
+export * from './setup-imports.js';

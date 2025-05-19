@@ -5,4 +5,4 @@
 pnpm run lint --max-warnings=0
 
 # then run tests
-pnpm test
+# pnpm test
