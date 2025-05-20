@@ -45,7 +45,7 @@ export class Entity {
     }
 
     // Set the entity reference in the component
-    (component as any).entity = this;
+    (component as Component).entity = this;
 
     // Add to components map
     this.components.set(componentType, component);
@@ -91,6 +91,7 @@ export class Entity {
     this.components.delete(componentType);
 
     // Clear the entity reference
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (component as any).entity = null;
 
     return true;

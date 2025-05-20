@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Container, Graphics, Text, TextStyle } from 'pixi.js';
 
 /** Debug panel positions */
@@ -248,6 +249,7 @@ export class DebugOverlay {
    * Update the overlay with current performance metrics
    * @param deltaTime - Time elapsed since last update
    */
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   update(deltaTime: number): void {
     if (!this.container.visible) return;
 
