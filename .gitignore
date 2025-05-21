@@ -41,3 +41,7 @@ Thumbs.db
 
 # Games files
 games/*
+!games/prometheus-demo/
+!games/prometheus-demo/**
+games/prometheus-demo/dist/
+games/prometheus-demo/node_modules/
