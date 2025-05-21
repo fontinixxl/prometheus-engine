@@ -27,6 +27,12 @@ export { Scene } from './scene/Scene';
 export { Entity } from './entity/Entity';
 export { Component } from './entity/Component';
 
+// Export components
+export { SpineComponent } from './components/SpineComponent';
+
+// Export loaders
+export { SpineLoader, SpineAssetConfig } from './loaders/SpineLoader';
+
 // Export debug tools
 export { DebugOverlay, DebugOverlayConfig, DebugPanelPosition } from './debug/DebugOverlay';
 
@@ -47,14 +53,3 @@ export {
   FederatedEvent,
   Ticker,
 } from 'pixi.js';
-
-// Export Layout types from @pixi/layout
-// Note: These will be exported when we properly integrate with @pixi/layout
-// For now we're using regular Container class
-
-/*
-export { 
-  Layout,
-  LayoutSystem
-} from '@pixi/layout';
-*/

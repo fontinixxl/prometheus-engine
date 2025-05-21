@@ -45,3 +45,5 @@ games/*
 !games/prometheus-demo/**
 games/prometheus-demo/dist/
 games/prometheus-demo/node_modules/
+
+__*/
