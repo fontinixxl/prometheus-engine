@@ -1,0 +1,76 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family:
+    system-ui,
+    -apple-system,
+    sans-serif;
+  color-scheme: dark;
+}
+
+html,
+body,
+#app {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #1e1e1e;
+  color: #cccccc;
+}
+
+/* Custom styles for resizable panels */
+.Panel {
+  display: flex;
+  overflow: auto;
+}
+
+.ResizeHandleOuter {
+  flex: 0 0 1px;
+  position: relative;
+  outline: none;
+  display: flex;
+  align-items: stretch;
+  justify-content: stretch;
+}
+
+.ResizeHandleOuter[data-resize-handle-active] {
+  background-color: rgb(0, 120, 212); /* Match editor-highlight color */
+}
+
+.ResizeHandleInner {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  transition: background-color 0.2s linear;
+}
+
+/* Horizontal resize handle */
+.horizontal {
+  height: 1px;
+  width: 100%;
+  cursor: row-resize;
+}
+
+.horizontal .ResizeHandleInner {
+  height: 4px;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+}
+
+/* Vertical resize handle */
+.vertical {
+  width: 1px;
+  height: 100%;
+  cursor: col-resize;
+}
+
+.vertical .ResizeHandleInner {
+  width: 4px;
+  top: 0;
+  bottom: 0;
+  transform: translateX(-50%);
+}

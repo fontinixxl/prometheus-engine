@@ -25,11 +25,11 @@
 
 - [x] Engine initializes and maintains stable FPS on both mobile and desktop
 - [ ] @pixi/layout integration works for responsive UI elements
-- [ ] Basic entities can be created and rendered
-- [ ] Resource loading works with progress reporting
-- [ ] Sample game demonstrates core functionality with responsive design
+- [x] Basic entities can be created and rendered
+- [x] Resource loading works with progress reporting
+- [x] Sample game demonstrates core functionality with responsive design
 - [ ] Full unit test coverage of core systems
-- [ ] Documentation of core architecture and APIs
+- [x] Documentation of core architecture and APIs
 
 ## Milestone 2: iGaming Core & REST API Integration
 

@@ -5,8 +5,10 @@
     "outDir": "./dist", // Override outDir to be relative to this tsconfig.json (i.e., packages/editor/dist)
     "rootDir": "./src", // Explicitly set rootDir for clarity, relative to this tsconfig.json
     "baseUrl": "./",
+    "jsx": "react", // Enable JSX support
     "paths": {
-      "@games/*": ["../../games/*"]
+      "@games/*": ["../../games/*"],
+      "@/*": ["./src/renderer/*"]
     }
   },
   "include": [

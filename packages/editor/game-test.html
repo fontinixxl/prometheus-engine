@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Prometheus Editor Test</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        background: #1e1e1e;
+        color: #cccccc;
+        font-family:
+          -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,
+          'Open Sans', 'Helvetica Neue', sans-serif;
+      }
+      .container {
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+      }
+      .game-selector {
+        padding: 1rem;
+        background: #2d2d2d;
+      }
+      .game-container {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .game-viewport {
+        width: 800px;
+        height: 600px;
+        background: black;
+        position: relative;
+      }
+      select {
+        padding: 0.5rem;
+        background: #3d3d3d;
+        color: #cccccc;
+        border: 1px solid #555;
+        border-radius: 4px;
+      }
+      h1 {
+        margin-top: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="game-selector">
+        <h1>Prometheus Engine Game Test</h1>
+        <div>
+          <label for="game-select">Select Game:</label>
+          <select id="game-select"></select>
+          <button id="load-game">Load Game</button>
+        </div>
+      </div>
+      <div class="game-container">
+        <div class="game-viewport" id="game-viewport">
+          <div style="padding: 1rem">Select a game to load</div>
+        </div>
+      </div>
+    </div>
+
+    <script type="module">
+      // This is a simple test harness to load the game modules
+      import { loadGames } from './src/renderer/utils/gameLoader.js';
+
+      // Get the game selection dropdown
+      const gameSelect = document.getElementById('game-select');
+      const loadButton = document.getElementById('load-game');
+      const gameViewport = document.getElementById('game-viewport');
+
+      // Load the available games
+      const games = loadGames();
+      console.log('Available games:', Object.keys(games));
+
+      // Populate the dropdown
+      Object.keys(games).forEach((gameName) => {
+        const option = document.createElement('option');
+        option.value = gameName;
+        option.textContent = gameName;
+        gameSelect.appendChild(option);
+      });
+
+      // When the load button is clicked, load the selected game
+      let currentGame = null;
+      loadButton.addEventListener('click', async () => {
+        // Get the selected game
+        const selectedGame = gameSelect.value;
+        if (!selectedGame) return;
+
+        // Clear the viewport
+        gameViewport.innerHTML = `<div style="padding: 1rem;">Loading ${selectedGame}...</div>`;
+
+        try {
+          // Unload the current game if any
+          if (currentGame) {
+            // Future: Add cleanup method to the game module
+            gameViewport.innerHTML = '';
+            currentGame = null;
+          }
+
+          // Load the selected game
+          console.log('Loading game:', selectedGame);
+          const gameInfo = games[selectedGame];
+          if (!gameInfo) {
+            gameViewport.innerHTML = `<div style="padding: 1rem; color: red;">Game "${selectedGame}" not found</div>`;
+            return;
+          }
+
+          // Load the game module
+          console.log('Loading game module from:', gameInfo.path);
+          const gameModule = await gameInfo.module();
+
+          // Check if the game module has an init function
+          if (typeof gameModule.init !== 'function') {
+            gameViewport.innerHTML = `<div style="padding: 1rem; color: red;">Game "${selectedGame}" has no init() export</div>`;
+            return;
+          }
+
+          // Clear the viewport and initialize the game
+          gameViewport.innerHTML = '';
+          gameModule.init(gameViewport);
+          currentGame = gameModule;
+
+          console.log('Game loaded successfully');
+        } catch (error) {
+          console.error('Error loading game:', error);
+          gameViewport.innerHTML = `<div style="padding: 1rem; color: red;">Error loading game: ${error.message}</div>`;
+        }
+      });
+    </script>
+  </body>
+</html>

@@ -15,7 +15,8 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "dev": "pnpm --filter editor dev",
-    "init-game": "pnpm --filter cli run exec"
+    "init-game": "pnpm --filter cli run exec",
+    "build:dev": "tsc && vite build --sourcemap --mode development"
   },
   "keywords": [],
   "author": "",
@@ -36,7 +37,7 @@
     "concurrently": "^9.1.2",
     "cross-env": "^7.0.3",
     "cz-conventional-changelog": "^3.3.0",
-    "electron": "^36.2.0",
+    "electron": "26.2.2",
     "eslint": "^9.26.0",
     "eslint-plugin-react": "^7.37.5",
     "globals": "^16.1.0",

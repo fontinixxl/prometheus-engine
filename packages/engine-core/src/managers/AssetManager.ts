@@ -56,6 +56,7 @@ export class AssetManager {
   private bundles: Map<string, AssetBundleDefinition> = new Map();
 
   /** Map of loaded assets by name */
+
   private loadedAssets: Map<string, unknown> = new Map();
 
   /** Map of loaded bundles by name */

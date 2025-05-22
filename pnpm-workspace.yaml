@@ -1,3 +1,9 @@
 packages:
   - packages/*
   - games/*
+ignoredBuiltDependencies:
+  - electron-winstaller
+  - esbuild
+onlyBuiltDependencies:
+  - '@tailwindcss/oxide'
+  - electron
