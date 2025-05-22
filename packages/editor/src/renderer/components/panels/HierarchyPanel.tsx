@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { FaFolder, FaFolderOpen, FaCube, FaChevronRight, FaChevronDown } from 'react-icons/fa';
-import { GameEntity, GameComponent, SceneInfo, loadGame } from '../../utils/games';
+import { GameEntity, GameComponent, SceneInfo, getGameModule } from '../../utils/games';
 
 interface HierarchyPanelProps {
   gameName: string;
@@ -34,9 +34,10 @@ const convertEntitiesToTreeNodes = (entities: GameEntity[]): TreeNode[] => {
 // Function to get scene data from the game module
 const getSceneData = async (gameName: string): Promise<TreeNode[]> => {
   try {
-    const gameModule = await loadGame(gameName);
+    // Use getGameModule instead of loadGame
+    const gameModule = await getGameModule(gameName);
     if (!gameModule) {
-      console.error(`Failed to load game ${gameName}`);
+      console.error(`Failed to load game module for ${gameName}`);
       return getEmptyScene();
     }
 

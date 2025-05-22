@@ -50,6 +50,23 @@ export class ResponsiveColorScene extends Scene {
     this.background.endFill();
   }
 }
+
+// To use this scene in a game module:
+//
+// import { Engine } from \'@prometheus/engine-core\';
+// import { ResponsiveColorScene } from \'./ResponsiveColorScene\'; // Assuming file location
+//
+// export const MyResponsiveGame = {
+//   init: async (engine: Engine, container: HTMLElement) => {
+//     const responsiveScene = new ResponsiveColorScene();
+//     engine.sceneManager.addScene(responsiveScene);
+//     engine.switchScene(\'responsive-color-demo\');
+//   }
+//   // You might also export metadata if needed by the editor
+//   // getSceneData: () => { ... }
+// };
+//
+// export default MyResponsiveGame;
 ```
 
 This approach makes it immediately obvious which device type and orientation the engine has detected, which is invaluable during testing.
@@ -118,6 +135,21 @@ class StackRowScene extends Scene {
     }
   }
 }
+
+// To use this scene in a game module:
+//
+// import { Engine } from \'@prometheus/engine-core\';
+// import { StackRowScene } from \'./StackRowScene\'; // Assuming file location
+//
+// export const MyStackRowGame = {
+//   init: async (engine: Engine, container: HTMLElement) => {
+//     const stackRowScene = new StackRowScene();
+//     engine.sceneManager.addScene(stackRowScene);
+//     engine.switchScene(\'stack-row-demo\');
+//   }
+// };
+//
+// export default MyStackRowGame;
 ```
 
 ### Pattern 2: Adaptive Content Scale
@@ -183,6 +215,21 @@ class AdaptiveScaleScene extends Scene {
     }
   }
 }
+
+// To use this scene in a game module:
+//
+// import { Engine } from \'@prometheus/engine-core\';
+// import { AdaptiveScaleScene } from \'./AdaptiveScaleScene\'; // Assuming file location
+//
+// export const MyAdaptiveScaleGame = {
+//   init: async (engine: Engine, container: HTMLElement) => {
+//     const adaptiveScaleScene = new AdaptiveScaleScene();
+//     engine.sceneManager.addScene(adaptiveScaleScene);
+//     engine.switchScene(\'adaptive-scale-demo\');
+//   }
+// };
+//
+// export default MyAdaptiveScaleGame;
 ```
 
 ## Device Information Display
@@ -242,6 +289,21 @@ class DeviceInfoDisplay extends Scene {
     this.infoBackground.endFill();
   }
 }
+
+// To use this scene in a game module:
+//
+// import { Engine } from \'@prometheus/engine-core\';
+// import { DeviceInfoDisplay } from \'./DeviceInfoDisplay\'; // Assuming file location
+//
+// export const MyDeviceInfoGame = {
+//   init: async (engine: Engine, container: HTMLElement) => {
+//     const deviceInfoScene = new DeviceInfoDisplay();
+//     engine.sceneManager.addScene(deviceInfoScene);
+//     engine.switchScene(\'device-info-display\');
+//   }
+// };
+//
+// export default MyDeviceInfoGame;
 ```
 
 ## Responsive Layout Grid
@@ -340,6 +402,21 @@ class ResponsiveGridScene extends Scene {
     }
   }
 }
+
+// To use this scene in a game module:
+//
+// import { Engine } from \'@prometheus/engine-core\';
+// import { ResponsiveGridScene } from \'./ResponsiveGridScene\'; // Assuming file location
+//
+// export const MyResponsiveGridGame = {
+//   init: async (engine: Engine, container: HTMLElement) => {
+//     const responsiveGridScene = new ResponsiveGridScene();
+//     engine.sceneManager.addScene(responsiveGridScene);
+//     engine.switchScene(\'responsive-grid-demo\');
+//   }
+// };
+//
+// export default MyResponsiveGridGame;
 ```
 
 ## Dynamic Asset Swapping
@@ -409,6 +486,23 @@ class ResponsiveAssetScene extends Scene {
     }
   }
 }
+
+// To use this scene in a game module:
+//
+// import { Engine } from \'@prometheus/engine-core\';
+// import { ResponsiveAssetScene } from \'./ResponsiveAssetScene\'; // Assuming file location
+//
+// export const MyResponsiveAssetGame = {
+//   init: async (engine: Engine, container: HTMLElement) => {
+//     // The engine instance is passed, ResponsiveAssetScene\'s init will use it.
+//     const responsiveAssetScene = new ResponsiveAssetScene();
+//     // addScene will call the scene\'s init method.
+//     engine.sceneManager.addScene(responsiveAssetScene);
+//     engine.switchScene(\'responsive-asset-demo\');
+//   }
+// };
+//
+// export default MyResponsiveAssetGame;
 ```
 
 ## Responsive HUD Layout
@@ -513,6 +607,21 @@ class ResponsiveHUDScene extends Scene {
     }
   }
 }
+
+// To use this scene in a game module:
+//
+// import { Engine } from \'@prometheus/engine-core\';
+// import { ResponsiveHUDScene } from \'./ResponsiveHUDScene\'; // Assuming file location
+//
+// export const MyResponsiveHUDGame = {
+//   init: async (engine: Engine, container: HTMLElement) => {
+//     const responsiveHUDScene = new ResponsiveHUDScene();
+//     engine.sceneManager.addScene(responsiveHUDScene);
+//     engine.switchScene(\'responsive-hud-demo\');
+//   }
+// };
+//
+// export default MyResponsiveHUDGame;
 ```
 
 ## Orientation Change Handling
@@ -634,7 +743,21 @@ class OrientationChangeScene extends Scene {
     this.arrow.position.set(width / 2, height / 2 + 50);
   }
 }
-```
+
+// To use this scene in a game module:
+//
+// import { Engine } from \'@prometheus/engine-core\';
+// import { OrientationChangeScene } from \'./OrientationChangeScene\'; // Assuming file location
+//
+// export const MyOrientationChangeGame = {
+//   init: async (engine: Engine, container: HTMLElement) => {
+//     const orientationChangeScene = new OrientationChangeScene();
+//     engine.sceneManager.addScene(orientationChangeScene);
+//     engine.switchScene(\'orientation-change-demo\');
+//   }
+// };
+//
+// export default MyOrientationChangeGame;
 
 ## Conclusion
 
@@ -647,3 +770,4 @@ Remember these key principles:
 3. Test on actual devices whenever possible
 4. Create layouts that adapt gracefully to changes
 5. Consider using different assets for different device capabilities
+```

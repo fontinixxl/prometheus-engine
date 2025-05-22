@@ -4,7 +4,7 @@
 
 // Type definitions
 export type GameModule = {
-  init(container: HTMLElement): void;
+  init(container: HTMLElement): Promise<void> | void;
   pause?: () => void;
   resume?: () => void;
   step?: () => void;
@@ -32,9 +32,18 @@ export function loadGames(): Record<string, GameInfo> {
     ...import.meta.glob('../../../games/*/app.ts', { eager: false }),
     // Try one more level up (needed when running from a different context)
     ...import.meta.glob('../../../../games/*/app.ts', { eager: false }),
+    // Try additional patterns for different project structures
+    ...import.meta.glob('@games/*/src/app.ts', { eager: false }),
+    ...import.meta.glob('@games/*/index.ts', { eager: false }),
   };
 
-  console.log('Found game imports:', Object.keys(imports));
+  console.log('Found game import paths:', Object.keys(imports));
+
+  if (Object.keys(imports).length === 0) {
+    console.warn(
+      'No game imports found! Check the import.meta.glob patterns or the games folder location.',
+    );
+  }
 
   // Process imports into a more usable format
   const games: Record<string, GameInfo> = {};
@@ -52,10 +61,20 @@ export function loadGames(): Record<string, GameInfo> {
         path,
         module: moduleLoader as () => Promise<GameModule>,
       };
+
+      console.log(`Registered game: ${name} from path: ${path}`);
+    } else {
+      console.warn(`Could not extract game name from path: ${path}`);
     }
   });
 
-  console.log('Processed games:', Object.keys(games));
+  // Log success or failure
+  if (Object.keys(games).length > 0) {
+    console.log('Processed games:', Object.keys(games));
+  } else {
+    console.warn('No games were processed! Check the games folder structure.');
+  }
+
   return games;
 }
 

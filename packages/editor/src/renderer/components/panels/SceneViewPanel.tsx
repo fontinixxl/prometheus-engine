@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { FaPlay, FaPause, FaStepForward, FaExpand, FaCamera, FaCog } from 'react-icons/fa';
-import { GameModule, loadGame } from '../../utils/games';
+// Import getGameModule and initializeGame instead of loadGame
+import { GameModule, getGameModule, initializeGame } from '../../utils/games';
 
 interface SceneViewPanelProps {
   gameName: string;
@@ -82,45 +83,47 @@ const SceneViewPanel: React.FC<SceneViewPanelProps> = ({ gameName }) => {
     // Load and initialize the game
     const loadGameFn = async () => {
       try {
-        console.log('Loading game:', gameName);
+        console.log('Loading game module for:', gameName);
 
-        // Load the game module from our utility
-        const gameModule = await loadGame(gameName);
+        // Load the game module using getGameModule
+        const gameModule = await getGameModule(gameName);
+        console.log(`Game module loaded for "${gameName}":`, gameModule);
 
-        // Handle game not found
-        if (!gameModule) {
-          const error = `Game "${gameName}" not found or failed to load`;
-          console.error(error);
-          setError(error);
-          container.innerHTML = `<div class="p-4 text-red-500">${error}</div>`;
+        // Handle game not found or invalid module
+        if (!gameModule || typeof gameModule.init !== 'function') {
+          const errorMsg = `Game module "${gameName}" not found, failed to load, or is invalid.`;
+          console.error(errorMsg);
+          setError(errorMsg);
+          if (container) container.innerHTML = `<div class="p-4 text-red-500">${errorMsg}</div>`;
           setIsLoading(false);
           return;
         }
 
-        if (typeof gameModule.init === 'function') {
-          // Clear loading message
-          container.innerHTML = '';
-
-          // Initialize the game
-          gameModule.init(container);
-          gameInstanceRef.current = gameModule;
-          setIsPlaying(true);
-        } else {
-          setError(`Game "${gameName}" has no init() export`);
-          container.innerHTML = `<div class="p-4 text-red-500">Game "${gameName}" has no init() export.</div>`;
-        }
-      } catch (error) {
-        console.error(`Error loading game "${gameName}":`, error);
-        setError(`Error loading game "${gameName}"`);
-        container.innerHTML = `<div class="p-4 text-red-500">Error loading game "${gameName}". See console for details.</div>`;
+        // Clear loading message and initialize the game
+        if (container) container.innerHTML = '';
+        console.log(`Initializing game "${gameName}" in container`);
+        await initializeGame(gameModule, container); // Use initializeGame
+        console.log(`Game "${gameName}" initialized successfully`);
+        gameInstanceRef.current = gameModule;
+        setIsPlaying(true);
+      } catch (initError) {
+        // Catch errors from both getGameModule and initializeGame
+        console.error(`Error loading or initializing game "${gameName}":`, initError);
+        const errorMessage = initError instanceof Error ? initError.message : String(initError);
+        setError(`Error with game "${gameName}": ${errorMessage}`);
+        if (container)
+          container.innerHTML = `<div class="p-4 text-red-500">Error with game "${gameName}": ${errorMessage}</div>`;
       } finally {
         setIsLoading(false);
       }
     };
 
-    loadGameFn();
+    if (gameName && container) {
+      // Ensure gameName and container are present
+      loadGameFn();
+    }
 
-    // Cleanup on unmount
+    // Cleanup on unmount or when gameName changes
     return () => {
       if (containerRef.current) {
         containerRef.current.innerHTML = '';

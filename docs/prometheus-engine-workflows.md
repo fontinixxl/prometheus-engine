@@ -359,22 +359,32 @@ class ResponsiveScene extends Scene {
 }
 
 // Initialize the engine and game
-export async function init(container: HTMLElement): Promise<void> {
-  // Create the engine
-  const engine = new Engine({
-    debug: true,
-    backgroundColor: '#1099bb',
-  });
+// This function demonstrates how a game module would initialize the ResponsiveScene.
+// It would typically be part of an exported GameModule object.
+export async function init(engine: Engine, container: HTMLElement): Promise<void> {
+  // The 'engine' is provided by the host environment (e.g., the editor or a game launcher)
+  // and is assumed to be already initialized, potentially using the 'container'.
 
-  // Initialize the engine
-  await engine.init(container);
-
-  // Create and switch to the responsive scene
+  // Create and add the responsive scene to the provided engine
   const scene = new ResponsiveScene();
+  // The ResponsiveScene's own init() method (defined above) will be called by the scene manager.
+  // Inside ResponsiveScene, `this.engine` will refer to the engine instance passed here.
   engine.sceneManager.addScene(scene);
   engine.switchScene('responsive-demo');
+
+  // Example of how this init function would be part of a GameModule:
+  //
+  // interface GameModule {
+  //   init: (engine: Engine, container: HTMLElement) => Promise<void> | void;
+  //   // ... other optional methods
+  // }
+  //
+  // const myGame: GameModule = {
+  //   init: init // Assigning the function above
+  // };
+  //
+  // export default myGame;
 }
-```
 
 ## Conclusion
 
@@ -385,3 +395,4 @@ The Prometheus Engine provides a robust framework for creating games that work w
 3. **Responsive Layout**: Adapts to different device types and orientations
 
 By following the workflows outlined in this document, you can create games that provide an optimal experience regardless of the device they're played on.
+```

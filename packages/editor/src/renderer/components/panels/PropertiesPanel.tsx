@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropertyField, { PropertyValue } from '../PropertyField';
-import { loadGame } from '../../utils/games';
+// Import getGameModule instead of loadGame
+import { getGameModule } from '../../utils/games';
 
 interface PropertiesPanelProps {
   selectedEntity: string | null;
@@ -15,9 +16,12 @@ const getEntityProperties = async (
   if (!selectedId) return {};
 
   try {
-    const gameModule = await loadGame(gameName);
+    // Use getGameModule to get the game module without initializing it
+    const gameModule = await getGameModule(gameName);
     if (!gameModule || !gameModule.getEntities || !gameModule.getSceneInfo) {
-      console.warn('Game module does not have entity or scene data');
+      console.warn(
+        'Game module does not have entity or scene data, or getEntities/getSceneInfo methods are missing.',
+      );
       return {};
     }
 

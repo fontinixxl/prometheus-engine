@@ -9,7 +9,6 @@ export default defineConfig({
     alias: {
       '@games': path.resolve(__dirname, '../../games'),
       '@': path.resolve(__dirname, 'src/renderer'),
-      '/games': path.resolve(__dirname, '../../games'),
       ...prometheusImports,
     },
   },
@@ -43,7 +42,7 @@ export default defineConfig({
     emptyOutDir: true,
     rollupOptions: {
       input: path.resolve(__dirname, 'src/renderer/index.html'),
-      external: ['@prometheus/engine-core', /^@games\/.*/],
+      external: ['@prometheus/engine-core'],
     },
   },
   plugins: [react()],
